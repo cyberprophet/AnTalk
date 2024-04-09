@@ -1,4 +1,4 @@
-package com.example.antech
+package com.shareinvest.antech
 
 import io.flutter.embedding.android.FlutterActivity
 
