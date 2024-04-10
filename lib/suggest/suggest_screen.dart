@@ -1,33 +1,89 @@
-import 'package:antech/suggest/presenters/suggest_presenter.dart';
-import 'package:antech/widgets/circle_loading_widget.dart';
-import 'package:antech/widgets/error_widget.dart';
+import 'package:antech/suggest/widgets/suggest_card_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class SuggestScreen extends ConsumerWidget {
+class SuggestScreen extends ConsumerStatefulWidget {
   const SuggestScreen({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final provider = ref.watch(suggestProvider);
-    return Scaffold(
-      body: ModalProgressHUD(
-        inAsyncCall: provider.isLoading,
-        progressIndicator: const CenterCircularProgressIndicator(),
-        child: provider.when(
-          loading: () => const CenterCircularProgressIndicator(),
-          error: (error, stackTrace) => ErrorText(error: error.toString()),
-          data: (stock) => Center(
-            child: Text(stock.name ?? ''),
-          ),
-        ),
-      ),
-    );
+  ConsumerState<ConsumerStatefulWidget> createState() {
+    return _SuggestState();
   }
 
   static const String routeName = 'suggest';
   static const String routeUrl = '/suggest';
+}
+
+class _SuggestState extends ConsumerState {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: CardSwiper(
+          cardBuilder: (
+            context,
+            index,
+            horizontalOffsetPercentage,
+            verticalOffsetPercentage,
+          ) {
+            return cards[index];
+          },
+          onSwipe: _onSwipe,
+          padding: const EdgeInsets.all(0),
+          maxAngle: 70,
+          scale: 0.975,
+          threshold: 100,
+          allowedSwipeDirection: const AllowedSwipeDirection.only(
+            left: true,
+            right: true,
+            up: true,
+          ),
+          backCardOffset: Offset.zero,
+          duration: const Duration(milliseconds: 512),
+          cardsCount: cards.length,
+        ),
+      ),
+      backgroundColor: Colors.transparent,
+    );
+  }
+
+  bool _onSwipe(
+      int previousIndex, int? currentIndex, CardSwiperDirection direction) {
+    final card = cards[previousIndex];
+    if (card is SuggestCard) {
+      ref.read(card.suggestProvider.notifier).suggestStock();
+    }
+    return CardSwiperDirection.bottom != direction &&
+        CardSwiperDirection.none != direction;
+  }
+
+  final cards = [
+    SuggestCard(),
+    SuggestCard(),
+    SuggestCard(),
+    SuggestCard(),
+    Container(
+      clipBehavior: Clip.hardEdge,
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.2),
+            spreadRadius: 3,
+            blurRadius: 7,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
+      alignment: Alignment.center,
+      child: const Placeholder(),
+    ),
+    SuggestCard(),
+    SuggestCard(),
+    SuggestCard(),
+  ];
 }

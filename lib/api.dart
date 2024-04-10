@@ -1,5 +1,6 @@
 import 'package:antech/cache.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ApiProvider {
   Future<dynamic> getAsync(String path) async {
@@ -38,3 +39,5 @@ class ApiProvider {
     headers: {'Authorization': 'Bearer $bearerToken'},
   );
 }
+
+final api = Provider((ref) => ApiProvider());
