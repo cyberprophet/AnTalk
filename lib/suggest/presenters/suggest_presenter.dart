@@ -9,20 +9,21 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class SuggestPresenter extends AsyncNotifier<SuggestStock> {
   @override
   FutureOr<SuggestStock> build() async {
-    return await _suggestStock();
+    _api = ref.read(api);
+
+    final response = _api.getAsync('${dotenv.env['SUGGEST']}');
+
+    return SuggestStock.fromJson(await response);
   }
 
-  Future<SuggestStock> _suggestStock() async {
-    final response = await _api.getAsync(dotenv.env['SUGGEST']!);
+  Future suggestStock() async {
+    final response = await _api.getAsync('${dotenv.env['SUGGEST']}');
 
     if (kDebugMode) {
       print('SuggestPresenter:: $response');
     }
-    return SuggestStock.fromJson(response);
+    state = AsyncData(SuggestStock.fromJson(response));
   }
 
-  final _api = ApiProvider();
+  late final ApiProvider _api;
 }
-
-final suggestProvider = AsyncNotifierProvider<SuggestPresenter, SuggestStock>(
-    () => SuggestPresenter());
