@@ -13,6 +13,7 @@ class CenterCircularProgressIndicator extends StatelessWidget {
                 ? const Color(0xCFE7AE29)
                 : const Color(0xCF512BD4),
           ),
+          backgroundColor: Colors.transparent,
         ),
       );
 }

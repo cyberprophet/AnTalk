@@ -5,11 +5,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 ThemeData get theme => ThemeData(
       appBarTheme: const AppBarTheme(
-        backgroundColor: Color(0xFF67A4FF),
+        backgroundColor: Color(0xFFFFFFFF),
         systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarBrightness: Brightness.dark,
+          statusBarBrightness: Brightness.light,
           statusBarColor: Colors.transparent,
-          statusBarIconBrightness: Brightness.light,
+          statusBarIconBrightness: Brightness.dark,
         ),
       ),
       scaffoldBackgroundColor: const Color(0xFFFFFFFF),
@@ -35,8 +35,8 @@ TextTheme get cuteFontTextTheme => TextTheme(
       ),
       displayLarge: GoogleFonts.cuteFont(
         fontSize: (32 + 16).sp,
-        height: .75.h,
-        color: const Color(0xFFDCDCDC),
+        height: 1.h,
+        color: const Color(0xFF696969),
       ),
       displayMedium: GoogleFonts.cuteFont(
         fontSize: 28.sp,
@@ -44,15 +44,15 @@ TextTheme get cuteFontTextTheme => TextTheme(
         color: const Color(0xFF696969),
       ),
       displaySmall: GoogleFonts.cuteFont(
-        fontSize: 28.sp,
+        fontSize: (16 + 8).sp,
         height: .75.h,
-        color: const Color(0xFFFFC200),
+        color: const Color(0xFF6600FF),
       ),
     );
 
 ThemeData get darkTheme => ThemeData(
       appBarTheme: const AppBarTheme(
-        backgroundColor: Color(0xFF67A4FF),
+        backgroundColor: Color(0xFF000000),
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarBrightness: Brightness.dark,
           statusBarColor: Colors.transparent,
