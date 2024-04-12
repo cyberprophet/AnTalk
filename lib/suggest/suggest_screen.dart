@@ -19,6 +19,31 @@ class SuggestScreen extends ConsumerStatefulWidget {
 
 class _SuggestState extends ConsumerState {
   @override
+  void initState() {
+    while (cards.length < 0x10) {
+      cards.add(SuggestCard());
+    }
+    cards.add(Container(
+      clipBehavior: Clip.hardEdge,
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.2),
+            spreadRadius: 3,
+            blurRadius: 7,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
+      alignment: Alignment.center,
+      child: const Placeholder(),
+    ));
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
@@ -60,30 +85,5 @@ class _SuggestState extends ConsumerState {
         CardSwiperDirection.none != direction;
   }
 
-  final cards = [
-    SuggestCard(),
-    SuggestCard(),
-    SuggestCard(),
-    SuggestCard(),
-    Container(
-      clipBehavior: Clip.hardEdge,
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            spreadRadius: 3,
-            blurRadius: 7,
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
-      alignment: Alignment.center,
-      child: const Placeholder(),
-    ),
-    SuggestCard(),
-    SuggestCard(),
-    SuggestCard(),
-  ];
+  final cards = List<Widget>.empty(growable: true);
 }
