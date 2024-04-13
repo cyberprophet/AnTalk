@@ -20,6 +20,7 @@ ThemeData get theme => ThemeData(
         outline: Color(0x7A6A0DAD),
         onPrimaryContainer: Color(0xCF800000),
         onSecondaryContainer: Color(0xCF000080),
+        scrim: Color(0xCF512BD4),
       ),
     );
 
@@ -79,6 +80,7 @@ ThemeData get darkTheme => ThemeData(
         outline: Color(0x7AFFD700),
         onPrimaryContainer: Color(0xCFFF0000),
         onSecondaryContainer: Color(0xCF00BFFF),
+        scrim: Color(0xCFE7AE29),
       ),
     );
 

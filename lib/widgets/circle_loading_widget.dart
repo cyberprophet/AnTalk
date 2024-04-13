@@ -10,18 +10,16 @@ class CenterCircularProgressIndicator<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ModalProgressHUD(
-      inAsyncCall: provider.isLoading,
-      progressIndicator: _progressIndicator(context),
-      child: _progressIndicator(context));
+        inAsyncCall: provider.isLoading,
+        progressIndicator: _progressIndicator(context),
+        child: Container(color: Colors.transparent),
+      );
 
   Widget _progressIndicator(BuildContext context) => Center(
         child: CircularProgressIndicator.adaptive(
-          valueColor: AlwaysStoppedAnimation(
-            MediaQuery.of(context).platformBrightness == Brightness.dark
-                ? const Color(0xCFE7AE29)
-                : const Color(0xCF512BD4),
-          ),
           backgroundColor: Colors.transparent,
+          valueColor:
+              AlwaysStoppedAnimation(Theme.of(context).colorScheme.scrim),
         ),
       );
 
