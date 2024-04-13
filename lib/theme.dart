@@ -15,6 +15,12 @@ ThemeData get theme => ThemeData(
       scaffoldBackgroundColor: const Color(0xFFFFFFFF),
       fontFamily: GoogleFonts.cuteFont().fontFamily,
       textTheme: GoogleFonts.cuteFontTextTheme(cuteFontTextTheme),
+      cardColor: const Color(0xFFDCDCDC).withOpacity(0.2),
+      colorScheme: const ColorScheme.light(
+        outline: Color(0x7A6A0DAD),
+        onPrimaryContainer: Color(0xCF800000),
+        onSecondaryContainer: Color(0xCF000080),
+      ),
     );
 
 TextTheme get cuteFontTextTheme => TextTheme(
@@ -48,6 +54,12 @@ TextTheme get cuteFontTextTheme => TextTheme(
         height: .75.h,
         color: const Color(0xFF6600FF),
       ),
+      labelSmall: GoogleFonts.cuteFont(
+        fontSize: 10.sp,
+        fontWeight: FontWeight.bold,
+        letterSpacing: -.75,
+        color: const Color(0xC3696969),
+      ),
     );
 
 ThemeData get darkTheme => ThemeData(
@@ -62,6 +74,12 @@ ThemeData get darkTheme => ThemeData(
       scaffoldBackgroundColor: const Color(0xFF000000),
       fontFamily: GoogleFonts.cuteFont().fontFamily,
       textTheme: GoogleFonts.cuteFontTextTheme(cuteFontTextDarkTheme),
+      cardColor: const Color(0xFFDCDCDC).withOpacity(0.2),
+      colorScheme: const ColorScheme.dark(
+        outline: Color(0x7AFFD700),
+        onPrimaryContainer: Color(0xCFFF0000),
+        onSecondaryContainer: Color(0xCF00BFFF),
+      ),
     );
 
 TextTheme get cuteFontTextDarkTheme => TextTheme(
@@ -94,5 +112,11 @@ TextTheme get cuteFontTextDarkTheme => TextTheme(
         fontSize: (16 + 8).sp,
         height: .75.h,
         color: const Color(0xFFFFC200),
+      ),
+      labelSmall: GoogleFonts.cuteFont(
+        fontSize: 10.sp,
+        fontWeight: FontWeight.bold,
+        letterSpacing: -.75,
+        color: const Color(0xC3FFD700),
       ),
     );
