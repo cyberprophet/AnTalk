@@ -45,10 +45,12 @@ class _SuggestState extends ConsumerState {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: theme.appBarTheme.backgroundColor,
         automaticallyImplyLeading: false,
         actions: const [],
       ),
@@ -76,7 +78,7 @@ class _SuggestState extends ConsumerState {
           cardsCount: cards.length,
         ),
       ),
-      backgroundColor: Colors.transparent,
+      backgroundColor: theme.scaffoldBackgroundColor,
     );
   }
 
