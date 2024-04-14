@@ -45,7 +45,15 @@ class _SuggestState extends ConsumerState {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Scaffold(
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        backgroundColor: theme.appBarTheme.backgroundColor,
+        automaticallyImplyLeading: false,
+        actions: const [],
+      ),
       body: SafeArea(
         child: CardSwiper(
           cardBuilder: (
@@ -53,9 +61,8 @@ class _SuggestState extends ConsumerState {
             index,
             horizontalOffsetPercentage,
             verticalOffsetPercentage,
-          ) {
-            return cards[index];
-          },
+          ) =>
+              cards[index],
           onSwipe: _onSwipe,
           padding: const EdgeInsets.all(0),
           maxAngle: 70,
@@ -71,13 +78,14 @@ class _SuggestState extends ConsumerState {
           cardsCount: cards.length,
         ),
       ),
-      backgroundColor: Colors.transparent,
+      backgroundColor: theme.scaffoldBackgroundColor,
     );
   }
 
   bool _onSwipe(
       int previousIndex, int? currentIndex, CardSwiperDirection direction) {
     final card = cards[previousIndex];
+
     if (card is SuggestCard) {
       ref.read(card.suggestProvider.notifier).suggestStock();
     }
