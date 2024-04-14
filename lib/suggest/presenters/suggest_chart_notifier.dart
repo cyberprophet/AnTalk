@@ -12,7 +12,7 @@ class SuggestChartNotifier
     _api = ref.read(api);
 
     final response = await _api
-        .getAsync('${dotenv.env['DAY_CHART']}?code=$arg&period=${64 + 32}');
+        .getAsync('${dotenv.env['DAY_CHART']}?code=$arg&period=${64 + 16 + 8}');
 
     if (response is Map<String, dynamic> && response['chart'] is List) {
       _chart = (response['chart'] as List)

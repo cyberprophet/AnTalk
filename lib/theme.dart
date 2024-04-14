@@ -22,6 +22,7 @@ ThemeData get theme => ThemeData(
         onSecondaryContainer: Color(0xCF000080),
         scrim: Color(0xCF512BD4),
       ),
+      canvasColor: const Color(0xACFFFFFF),
     );
 
 TextTheme get cuteFontTextTheme => TextTheme(
@@ -82,6 +83,7 @@ ThemeData get darkTheme => ThemeData(
         onSecondaryContainer: Color(0xCF00BFFF),
         scrim: Color(0xCFE7AE29),
       ),
+      canvasColor: const Color(0xAC000000),
     );
 
 TextTheme get cuteFontTextDarkTheme => TextTheme(
