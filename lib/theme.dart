@@ -20,7 +20,9 @@ ThemeData get theme => ThemeData(
         outline: Color(0x7A6A0DAD),
         onPrimaryContainer: Color(0xCF800000),
         onSecondaryContainer: Color(0xCF000080),
+        scrim: Color(0xCF512BD4),
       ),
+      canvasColor: const Color(0xACFFFFFF),
     );
 
 TextTheme get cuteFontTextTheme => TextTheme(
@@ -55,9 +57,8 @@ TextTheme get cuteFontTextTheme => TextTheme(
         color: const Color(0xFF6600FF),
       ),
       labelSmall: GoogleFonts.cuteFont(
-        fontSize: 10.sp,
+        fontSize: 12.sp,
         fontWeight: FontWeight.bold,
-        letterSpacing: -.75,
         color: const Color(0xC3696969),
       ),
     );
@@ -79,7 +80,9 @@ ThemeData get darkTheme => ThemeData(
         outline: Color(0x7AFFD700),
         onPrimaryContainer: Color(0xCFFF0000),
         onSecondaryContainer: Color(0xCF00BFFF),
+        scrim: Color(0xCFE7AE29),
       ),
+      canvasColor: const Color(0xAC000000),
     );
 
 TextTheme get cuteFontTextDarkTheme => TextTheme(
@@ -114,9 +117,8 @@ TextTheme get cuteFontTextDarkTheme => TextTheme(
         color: const Color(0xFFFFC200),
       ),
       labelSmall: GoogleFonts.cuteFont(
-        fontSize: 10.sp,
+        fontSize: 12.sp,
         fontWeight: FontWeight.bold,
-        letterSpacing: -.75,
         color: const Color(0xC3FFD700),
       ),
     );

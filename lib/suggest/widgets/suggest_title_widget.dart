@@ -11,8 +11,25 @@ class SuggestTitle extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
+
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: (16 + 8).w),
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: theme.cardColor,
+            spreadRadius: .5,
+            blurRadius: .5,
+            offset: const Offset(0, 0),
+          ),
+        ],
+        borderRadius: const BorderRadius.only(
+          topRight: Radius.circular(10),
+          bottomLeft: Radius.circular(10),
+        ),
+        color: theme.canvasColor,
+      ),
+      padding: EdgeInsets.symmetric(horizontal: (16 + 8).w, vertical: (16).h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
