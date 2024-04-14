@@ -31,6 +31,9 @@ dependencies:
   flutter:
     sdk: flutter
 
+  flutter_localizations:
+    sdk: flutter
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
@@ -41,6 +44,7 @@ dependencies:
 
   flutter_card_swiper: ^7.0.0
   flutter_dotenv: ^5.1.0
+  flutter_launcher_icons: ^0.13.1
   flutter_localization: ^0.2.0
   flutter_riverpod: ^2.5.1
   flutter_screenutil: ^5.9.0
@@ -56,9 +60,6 @@ dependencies:
   shared_preferences: ^2.2.2
   syncfusion_flutter_charts: ^25.1.39+1
 
-  flutter_localizations:
-    sdk: flutter
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -68,13 +69,14 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^3.0.0
+  flutter_lints: ^3.0.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
 flutter:
+  generate: true
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -110,3 +112,30 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+flutter_intl:
+  enabled: true
+
+flutter_launcher_icons:
+  android: "launcher"
+
+  ios: true
+
+  image_path: "assets/icon.png"
+
+  # min_sdk_android: 21
+
+  # web:
+  #   generate: true
+  #   image_path: "path/to/image.png"
+  #   background_color: "#hexcode"
+  #   theme_color: "#hexcode"
+
+  # windows:
+  #   generate: true
+  #   image_path: "path/to/image.png"
+  #   icon_size: 48
+
+  # macos:
+  #   generate: true
+  #   image_path: "path/to/image.png"
