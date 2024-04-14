@@ -57,9 +57,8 @@ TextTheme get cuteFontTextTheme => TextTheme(
         color: const Color(0xFF6600FF),
       ),
       labelSmall: GoogleFonts.cuteFont(
-        fontSize: 10.sp,
+        fontSize: 12.sp,
         fontWeight: FontWeight.bold,
-        letterSpacing: -.75,
         color: const Color(0xC3696969),
       ),
     );
@@ -118,9 +117,8 @@ TextTheme get cuteFontTextDarkTheme => TextTheme(
         color: const Color(0xFFFFC200),
       ),
       labelSmall: GoogleFonts.cuteFont(
-        fontSize: 10.sp,
+        fontSize: 12.sp,
         fontWeight: FontWeight.bold,
-        letterSpacing: -.75,
         color: const Color(0xC3FFD700),
       ),
     );
