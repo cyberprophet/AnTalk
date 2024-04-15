@@ -1,0 +1,57 @@
+name: AnTech
+
+on:
+  push:
+    branches: [ 'dev' ]
+
+    paths:
+      - 'lib/**'
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+
+    steps:
+    
+    - uses: actions/checkout@v3
+      
+    - uses: actions/setup-java@v2
+      with:
+        distribution: 'zulu'
+        java-version: '12'
+          
+    - uses: subosito/flutter-action@v2.10.0
+      with:
+        flutter-version: '3.x'
+        channel: stable
+
+    - run: flutter --version
+      
+    - name: Install dependencies
+      run: flutter pub get
+      
+    - name: Build android
+      run: flutter build apk --release --split-per-abi --sound-null-safety
+      
+#  iOS:
+#    runs-on: macos-latest
+    
+#    steps:
+    
+#    - name: Checkout
+#      uses: actions/checkout@v2
+
+#    - name: Setup Flutter
+#      uses: subosito/flutter-action@v2.10.0
+#      with:
+#        flutter-version: 3.7.11
+#        channel: stable
+
+#    - name: Install CocoaPods
+#      run: sudo gem install cocoapods
+
+#    - name: Install dependencies
+#      run: flutter pub get
+
+#    - name: Build iOS
+#      run: flutter build ios --release --no-codesign
