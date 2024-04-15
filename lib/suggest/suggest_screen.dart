@@ -1,7 +1,13 @@
+import 'dart:io';
+
+import 'package:antech/cache.dart';
 import 'package:antech/suggest/widgets/suggest_card_widget.dart';
+import 'package:antech/widgets/banner_ads_widget.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class SuggestScreen extends ConsumerStatefulWidget {
   const SuggestScreen({
@@ -23,24 +29,16 @@ class _SuggestState extends ConsumerState {
     while (cards.length < 0x10) {
       cards.add(SuggestCard());
     }
-    cards.add(Container(
-      clipBehavior: Clip.hardEdge,
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            spreadRadius: 3,
-            blurRadius: 7,
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
-      alignment: Alignment.center,
-      child: const Placeholder(),
-    ));
+    _createInterstitialAd();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    if (ads != null) {
+      ads?.dispose();
+    }
+    super.dispose();
   }
 
   @override
@@ -52,6 +50,8 @@ class _SuggestState extends ConsumerState {
       appBar: AppBar(
         backgroundColor: theme.appBarTheme.backgroundColor,
         automaticallyImplyLeading: false,
+        centerTitle: true,
+        title: const BannerAds(),
         actions: const [],
       ),
       body: SafeArea(
@@ -87,11 +87,70 @@ class _SuggestState extends ConsumerState {
     final card = cards[previousIndex];
 
     if (card is SuggestCard) {
+      final execute = previousIndex == DateTime.now().second % 15;
+
+      if (kDebugMode) {
+        print({'previousIndex': previousIndex, 'execute': execute});
+      }
+      if (execute && ads != null) {
+        _showInterstitialAd();
+      }
       ref.read(card.suggestProvider.notifier).suggestStock();
     }
     return CardSwiperDirection.bottom != direction &&
         CardSwiperDirection.none != direction;
   }
+
+  void _createInterstitialAd() {
+    InterstitialAd.load(
+      adUnitId: interstitialUnitId[Platform.isAndroid ? 'android' : 'ios']!,
+      request: const AdRequest(),
+      adLoadCallback: InterstitialAdLoadCallback(
+        onAdLoaded: (InterstitialAd ad) {
+          if (kDebugMode) {
+            print('$ad loaded');
+          }
+          ad.setImmersiveMode(Platform.isAndroid);
+
+          ads = ad;
+        },
+        onAdFailedToLoad: (LoadAdError error) {
+          if (kDebugMode) {
+            print('InterstitialAd failed to load: $error.');
+          }
+        },
+      ),
+    );
+  }
+
+  void _showInterstitialAd() {
+    ads?.fullScreenContentCallback = FullScreenContentCallback(
+      onAdShowedFullScreenContent: (InterstitialAd ad) {
+        if (kDebugMode) {
+          print('$ad onAdShowedFullScreenContent.');
+        }
+      },
+      onAdDismissedFullScreenContent: (InterstitialAd ad) {
+        if (kDebugMode) {
+          print('$ad onAdDismissedFullScreenContent.');
+        }
+        ad.dispose();
+
+        _createInterstitialAd();
+      },
+      onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
+        if (kDebugMode) {
+          print('$ad onAdFailedToShowFullScreenContent: $error');
+        }
+        ad.dispose();
+
+        _createInterstitialAd();
+      },
+    );
+    ads?.show();
+  }
+
+  InterstitialAd? ads;
 
   final cards = List<Widget>.empty(growable: true);
 }
